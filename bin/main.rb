@@ -1,8 +1,5 @@
 # !/usr/bin/env ruby
 
-puts 'hello, world'
-
-puts 'Welcome to Tic-tac-toe player 1 please enter your name'
 board = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
 def display_board(board)
   puts " #{board[0]}| #{board[1]} |#{board[2]}"
@@ -12,21 +9,52 @@ def display_board(board)
   puts " #{board[6]}| #{board[7]} |#{board[8]}"
 end
 
-display_board(board)
-player_1 = gets.chomp
-
-def valide_name(name)
-  return true unless name != '' || ' '
-  end
-
-if valide_name(player_1)
-  puts ' player 1 please enter your name'
-  player_2 = gets.chomp
-
-else
-  puts 'Welcome to Tic-tac-toe player 1 please enter your name'
-  player_1 = gets.chomp
-
+def validate_name(name)
+    if name == "" || name == " "
+        false
+    else
+        true
+    end
 end
 
-# validate name if its empty or not valid re-ask for user input
+display_board(board)
+
+puts 'Welcome to Tic-Tac-Toe!'
+puts 'Player 1 - Please enter your name:'
+player_1 = gets.chomp
+
+
+if validate_name(player_1)
+  puts "Valid name."
+else
+  puts "Sorry! Invalid name. Try again."
+  puts 'Player 1 - please enter your name: '
+  player_1 = gets.chomp
+   if validate_name(player_1)
+     puts "Okay, good name!"
+   else
+    puts "Your name is invalid again. We'll just call you 'Player 1'"
+    player_1 = "Player 1"
+   end
+end
+
+puts ""
+
+puts 'Player 2 - please enter your name'
+player_2 = gets.chomp
+
+if validate_name(player_2)
+  puts "Valid name."
+else
+  puts "Sorry! Invalid name. Try again."
+  puts 'Player 2 - please enter your name: '
+  player_2 = gets.chomp
+    if validate_name(player_2)
+        puts "Okay, good name!"
+    else
+    puts "Your name is invalid again. We'll just call you 'Player 2'"
+    player_2 = "Player 2"
+    end
+end
+
+# Ask player for move and print that on screen.
