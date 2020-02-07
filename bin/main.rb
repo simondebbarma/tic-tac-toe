@@ -115,16 +115,13 @@ def win(board)
   false
 end
 
-def play(board)
-  turn(board) until game_end(board)
-  winner(board)
-end
-
-def board_full(board)
-  board.all? do |item|
-    if item == 'X'
-    elsif item == 'X'
-    end
+def winner(board)
+  if win(board).class == Array
+    win_player = win(board)
+    win_token = win_player[0]
+    board[win_token]
+  else
+    draw(board)
   end
 end
 
@@ -132,19 +129,33 @@ def game_end(board)
   win(board) || draw(board)
 end
 
-def winner(board)
-  puts ''
-  if current_player(board) == 'X'
-    puts "#{player_two} is the winner!"
+def play(board, player_one = nil, player_two = nil)
+  turn(board) until game_end(board)
+
+  if winner(board) == 'X'
+    puts "#{player_one} is the winner"
+  elsif winner(board) == 'O'
+    puts "#{player_two} is the winner"
+
   else
-    puts "#{player_one} is the winner!"
+    puts 'It a Draw game!'
   end
+end
+
+def board_full(board)
+  element = board.all? do |el|
+    if el == 'X'
+      true
+    elsif el == 'O'
+      true
+    end
+  end
+  element
 end
 
 def draw(board)
   if board_full(board)
-    
-    puts 'No more move game draw'
+    win(board).class != Array
   else
     false
   end
@@ -183,4 +194,4 @@ def count_move(board)
   counter
 end
 
-play(board)
+play(board, player_one, player_two)
