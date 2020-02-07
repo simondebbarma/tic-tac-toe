@@ -10,11 +10,11 @@ def display_board(board)
 end
 
 def validate_name(name)
-    if name == "" || name == " "
-        false
-    else
-        true
-    end
+  if name == '' || name == ' '
+    false
+  else
+    true
+  end
 end
 
 display_board(board)
@@ -23,38 +23,53 @@ puts 'Welcome to Tic-Tac-Toe!'
 puts 'Player 1 - Please enter your name:'
 player_1 = gets.chomp
 
-
 if validate_name(player_1)
-  puts "Valid name."
+  puts 'Valid name.'
 else
-  puts "Sorry! Invalid name. Try again."
+  puts 'Sorry! Invalid name. Try again.'
   puts 'Player 1 - please enter your name: '
   player_1 = gets.chomp
-   if validate_name(player_1)
-     puts "Okay, good name!"
-   else
+  if validate_name(player_1)
+    puts 'Okay, good name!'
+  else
     puts "Your name is invalid again. We'll just call you 'Player 1'"
-    player_1 = "Player 1"
-   end
+    player_1 = 'Player 1'
+  end
 end
 
-puts ""
+puts ''
 
 puts 'Player 2 - please enter your name'
 player_2 = gets.chomp
 
 if validate_name(player_2)
-  puts "Valid name."
+  puts 'Valid name.'
 else
-  puts "Sorry! Invalid name. Try again."
+  puts 'Sorry! Invalid name. Try again.'
   puts 'Player 2 - please enter your name: '
   player_2 = gets.chomp
-    if validate_name(player_2)
-        puts "Okay, good name!"
-    else
+  if validate_name(player_2)
+    puts 'Okay, good name!'
+  else
     puts "Your name is invalid again. We'll just call you 'Player 2'"
-    player_2 = "Player 2"
-    end
+    player_2 = 'Player 2'
+  end
 end
+
+def convert_input(input)
+  input.to_i - 1
+end
+
+def move(board, index, token = 'X')
+  position = convert_input(index)
+  board[position] = token
+end
+
+puts "#{player_1} your default token is X "
+puts "#{player_2} your default token is O"
+puts "#{player_1} chose a number from 1 to 9 to position your Token"
+index = gets.chomp
+move(board, index)
+display_board(board)
 
 # Ask player for move and print that on screen.
