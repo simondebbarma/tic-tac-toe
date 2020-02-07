@@ -1,7 +1,7 @@
 # !/usr/bin/env ruby
 
 board = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
-win_posibility = [
+WIN_POSSIBILITY = [
   [0,1,2],
   [3,4,5],
   [6,7,8],
@@ -94,11 +94,29 @@ def valid_move(board, index)
 end
 
 def win(board) 
+  WIN_POSSIBILITY.each do   |win_pos|
+    win_po_1 = win_pos[0]
+    win_po_2 = win_pos[1]
+    win_po_3 = win_pos[2]
+
+    position_1 = board[win_po_1]
+    position_2 = board[win_po_2]
+    position_3 = board[win_po_3]
+
+    if (position_1 == "X" && position_2 =="X" && position_3 =="X" || position_1 == "O" && position_2 =="O" && position_3 == "O")
+      return win_pos
+    end
+
+  end
+  return false
 end
+
 def play(board)
    until game_end(board)
     turn(board)
    end
+
+  #to do ask user to play again!
 end
 
 def board_full(board)
@@ -106,9 +124,7 @@ def board_full(board)
 end
 
 def game_end(board)
- if board_full(board)
-  puts 'Game over'
- end
+  win(board) || draw(board)
 end
 
 def winner 
@@ -117,7 +133,8 @@ end
 
 def draw(board)
  if board_full(board)
-   puts 'no more move game draw'
+    (win(board).class == Array)?false:true
+   puts 'No more move game draw'
    #to do display the winner
  else
   false
@@ -140,7 +157,6 @@ def turn(board)
   end
   
   move(board, input, current_player(board))
-  #todo dect the current user
   display_board(board)
 end
 
@@ -166,8 +182,7 @@ puts "#{player_two} your default token is O"
 puts ''
 
 
-puts "#{player_one} chose a number from 1 to 9 to position your Token"
+puts "#{player_one}"
 play(board)
 puts ''
 
-#display_board(board)
