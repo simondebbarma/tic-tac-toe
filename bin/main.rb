@@ -60,6 +60,20 @@ def convert_input(input)
   input.to_i - 1
 end
 
+def postion_taken(board, input); end
+
+def valid_move(_board, index)
+  if !index.between?(0, 8)
+    false
+  elsif postion_taken(index)
+    false
+  else
+    true
+  end
+end
+
+def turn; end
+
 def move(board, index, token = 'X')
   position = convert_input(index)
   board[position] = token
