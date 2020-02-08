@@ -71,8 +71,6 @@ puts ''
 display_board(board)
 puts ''
 
-puts "Here\'s the board. #{player_one} goes first."
-
 def convert_input(input)
   input.to_i - 1
 end
@@ -138,7 +136,7 @@ def play(board, player_one = nil, player_two = nil)
     puts "#{player_two} is the winner"
 
   else
-    puts 'It a Draw game!'
+    puts 'It a Draw!'
   end
 end
 
@@ -169,6 +167,11 @@ def available_slots(board)
   slots = []
   board.each do |x|
     slots << x if x.is_a? Integer
+  end
+  if slots.count.even?
+    puts 'Player 2\'s turn'
+  else
+    puts 'Player 1\'s turn'
   end
   slots.each { |x| print x.to_s + ' ' }
 end
