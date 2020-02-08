@@ -64,8 +64,8 @@ else
 end
 puts ''
 
-puts "#{player_one} your default token is X"
-puts "#{player_two} your default token is O"
+puts "#{player_one} you will play as X"
+puts "#{player_two} you are gonna be O"
 puts ''
 
 display_board(board)
@@ -178,12 +178,14 @@ def turn(board)
   until is_valid_move == true
     available_slots(board)
     puts ''
-    puts 'Make a move. Use your num pad to select one the above slots.'
+    puts 'Make a move. Select one the above slots.'
     puts ''
     input = gets.chomp
     input = convert_input(input)
     is_valid_move = valid_move(board, input)
-    puts '-------------------------'
+    puts ''
+    puts '-----------------------------------------'
+    puts ''
   end
 
   move(board, input, current_player(board))
