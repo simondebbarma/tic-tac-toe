@@ -1,6 +1,6 @@
 # !/usr/bin/env ruby
 
-board = %w[1 2 3 4 5 6 7 8 9]
+board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 WIN_POSSIBILITY = [
   [0, 1, 2],
   [3, 4, 5],
@@ -90,9 +90,9 @@ end
 
 def valid_move(board, index)
   if !index.between?(0, 8)
-    false
+    puts 'Invalid Move.'
   elsif postion_taken(board, index)
-    false
+    puts 'Invalid Move.'
   else
     true
   end
@@ -165,17 +165,30 @@ def move(board, index, token = 'X')
   board[index] = token
 end
 
+def available_slots(board)
+  slots = []
+  board.each do |x|
+    slots << x if x.is_a? Integer
+  end
+  slots.each { |x| print x.to_s + ' ' }
+end
+
 def turn(board)
   is_valid_move = false
   until is_valid_move == true
-    puts 'Enter the location you want to mark. Use your num pad.'
+    available_slots(board)
+    puts ''
+    puts 'Make a move. Use your num pad to select one the above slots.'
+    puts ''
     input = gets.chomp
     input = convert_input(input)
     is_valid_move = valid_move(board, input)
+    puts '-------------------------'
   end
 
   move(board, input, current_player(board))
   display_board(board)
+  puts ''
 end
 
 def current_player(board)
