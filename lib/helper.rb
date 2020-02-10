@@ -1,4 +1,4 @@
-module Helper
+module ValidatorHelper
   def validate_name(name)
     if name == ''
       false
@@ -12,5 +12,6 @@ module Helper
   end
 
   def payer_oneNmessage
+
   end
 end

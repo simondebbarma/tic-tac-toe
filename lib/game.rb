@@ -34,15 +34,7 @@ class Game
   end
 
   
-def valid_move(board, index)
-    if !index.between?(0, 8)
-      puts 'Invalid Move.'
-    elsif postion_taken(board, index)
-      puts 'Invalid Move.'
-    else
-      true
-    end
-  end
+
 
   
 def available_slots(board)

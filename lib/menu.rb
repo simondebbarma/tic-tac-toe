@@ -1,4 +1,6 @@
+require_relative './helper.rb'
 module MenuHelper
+  include ValidatorHelper
   def table(board)
     puts " #{board[0]} | #{board[1]} | #{board[2]}"
     puts '-----------'
@@ -28,6 +30,32 @@ module MenuHelper
         player.username_one = 'Player 1'.freeze
       end
     end
+    puts ''
+  end
+
+  def player_two_info(player)
+    puts 'Player 2 - Please enter your name:'
+    player.username_two = gets.chomp
+
+    if validate_name(player.username_two)
+
+    else
+      puts 'Sorry! Invalid name. Try again.'
+      puts 'Player 2 - please enter your name: '
+      player.username_two = gets.chomp
+      if validate_name(player.username_two)
+        puts 'Okay, good name!'
+      else
+        puts "Your name is invalid again. We'll just call you 'Player 1'"
+        player.username_two = 'Player 2'.freeze
+      end
+    end
+    puts ''
+  end
+
+  def notice(player)
+    puts "#{player.username_one} you will play as X"
+    puts "#{player.username_two} you are gonna be O"
     puts ''
   end
 end

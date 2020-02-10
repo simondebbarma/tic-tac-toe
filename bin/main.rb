@@ -6,7 +6,7 @@ require_relative '../lib/game.rb'
 require_relative '../lib/player.rb'
 
 class TicTacToe
-  extend Helper
+  extend ValidatorHelper
   include MenuHelper
   attr_accessor :board
 
@@ -19,40 +19,33 @@ class TicTacToe
     table(board)
   end
 
-  def collecte_one_info
-    player = Player.new
+  def collecte_info(player)
     player_one_info(player)
+    player_two_info(player)
+    notice(player)
   end
 
-  # puts 'Player 2 - please enter your name'
-  # @player_two = gets.chomp
+  def play(board, player_name_one = nil, player_name_two = nil, menu = nil)
+    turn(board, menu) until Game.game_end(board)
 
-  # if validate_name(@player_two)
+    if winner(board) == 'X'
+      puts "#{player_name_one} is the winner"
+    elsif winner(board) == 'O'
+      puts "#{player_name_two} is the winner"
 
-  # else
-  #   puts 'Sorry! Invalid name. Try again.'
-  #   puts 'Player 2 - please enter your name: '
-  #   @player_two = gets.chomp
-  #   if validate_name(@player_two)
-  #     puts 'Okay, good name!'
-  #   else
-  #     puts "Your name is invalid again. We'll just call you 'Player 2'"
-  #     @player_two = 'Player 2'.freeze
-  #   end
-  # end
-  # puts ''
+    else
+      puts 'It a Draw!'
+    end
 
-  # puts "#{@player_one} you will play as X"
-  # puts "#{@player_two} you are gonna be O"
-  # puts ''
-
-  # show_board
-  # puts ''
+  end
 end
-
+players = Player.new
+player_one = players.username_one
+player_two = players.username_one
 run = TicTacToe.new
 run.show_board
-run.collecte_one_info
+run.collecte_info(players)
+run.play(player_one, player_two)
 # TicTacToe.show_board
 # runtime = Logic.new
 # runtime.play(b.board)
