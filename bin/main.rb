@@ -1,4 +1,6 @@
 # !/usr/bin/env ruby
+require_relative '../lib/helper.rb'
+include Helper
 
 board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 WIN_POSSIBILITY = [
@@ -17,14 +19,6 @@ def display_board(board)
   puts " #{board[3]} | #{board[4]} | #{board[5]}"
   puts '-----------'
   puts " #{board[6]} | #{board[7]} | #{board[8]}"
-end
-
-def validate_name(name)
-  if name == ''
-    false
-  else
-    name != ' '
-  end
 end
 
 puts 'Welcome to Tic-Tac-Toe!'
@@ -70,10 +64,6 @@ puts ''
 
 display_board(board)
 puts ''
-
-def convert_input(input)
-  input.to_i - 1
-end
 
 def postion_taken(board, index)
   if board[index] == '^[1-9]'
