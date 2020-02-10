@@ -1,6 +1,4 @@
 class Logic
-    
-    attr_accessor :board
 
     WIN_POSSIBILITY = [
         [0, 1, 2],
@@ -31,7 +29,7 @@ class Logic
   end
   
   def play(board, player_one = nil, player_two = nil , menu = nil)
-    turn(board, menu) until game_end(board)
+    turn(board, menu) until Game.game_end(board)
   
     if winner(board) == 'X'
       puts "#{player_one} is the winner"

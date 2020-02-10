@@ -1,6 +1,9 @@
-class Game
-    attr_accessor :board
+require_relative './helper.rb'
+require_relative './menu.rb'
+require_relative './logic.rb'
+require_relative './player.rb'
 
+class Game 
     def winner(board)
         if win(board).class == Array
           win_player = win(board)
@@ -9,7 +12,7 @@ class Game
         else
           draw(board)
         end
-      end
+    end
   
   def game_end(board)
     win(board) || draw(board)
