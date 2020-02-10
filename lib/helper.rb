@@ -11,3 +11,4 @@ module Helper
     input.to_i - 1
   end
 end
+
