@@ -1,5 +1,6 @@
 # !/usr/bin/env ruby
 require_relative '../lib/helper.rb'
+require_relative '../lib/menu.rb'
 include Helper
 
 board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
@@ -13,13 +14,9 @@ WIN_POSSIBILITY = [
   [0, 4, 8],
   [2, 4, 6]
 ].freeze
-def display_board(board)
-  puts " #{board[0]} | #{board[1]} | #{board[2]}"
-  puts '-----------'
-  puts " #{board[3]} | #{board[4]} | #{board[5]}"
-  puts '-----------'
-  puts " #{board[6]} | #{board[7]} | #{board[8]}"
-end
+
+menu = Menu.new
+menu.display_board(board)
 
 puts 'Welcome to Tic-Tac-Toe!'
 puts 'Player 1 - Please enter your name:'
@@ -62,7 +59,7 @@ puts "#{player_one} you will play as X"
 puts "#{player_two} you are gonna be O"
 puts ''
 
-display_board(board)
+menu.display_board(board)
 puts ''
 
 def postion_taken(board, index)
@@ -117,8 +114,8 @@ def game_end(board)
   win(board) || draw(board)
 end
 
-def play(board, player_one = nil, player_two = nil)
-  turn(board) until game_end(board)
+def play(board, player_one = nil, player_two = nil , menu = nil)
+  turn(board, menu) until game_end(board)
 
   if winner(board) == 'X'
     puts "#{player_one} is the winner"
@@ -166,7 +163,7 @@ def available_slots(board)
   slots.each { |x| print x.to_s + ' ' }
 end
 
-def turn(board)
+def turn(board, menu = nil)
   is_valid_move = false
   until is_valid_move == true
     available_slots(board)
@@ -182,7 +179,7 @@ def turn(board)
   end
 
   move(board, input, current_player(board))
-  display_board(board)
+  menu.display_board(board)
   puts ''
 end
 
@@ -202,4 +199,4 @@ def count_move(board)
   counter
 end
 
-play(board, player_one, player_two)
+play(board, player_one, player_two, menu)

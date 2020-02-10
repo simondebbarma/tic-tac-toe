@@ -10,5 +10,4 @@ module Helper
   def convert_input(input)
     input.to_i - 1
   end
-  
 end
