@@ -32,7 +32,7 @@ class TicTacToe
 
     if game.winner(board) == 'X'
       custom_message_one(player_one, player_two)
-    elsif winner(board) == 'O'
+    elsif game.winner(board) == 'O'
       custom_message_two(player_one, player_two)
     else
       puts 'It a Draw!'
