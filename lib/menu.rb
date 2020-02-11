@@ -1,4 +1,5 @@
 require_relative './input_validator_helper.rb'
+
 module MenuHelper
   include ValidatorHelper
   def table(board)

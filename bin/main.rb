@@ -29,7 +29,7 @@ class TicTacToe
   end
 
   def play(player_one, player_two)
-    turn(board) until game.game_end(board)
+    turn(board, player_one, player_two) until game.game_end(board)
 
     if game.winner(board) == 'X'
       custom_message_one(player_one, player_two)
@@ -41,10 +41,10 @@ class TicTacToe
     end
   end
 
-  def turn(board)
+  def turn(board, player_one, player_two)
     is_valid_move = false
     until is_valid_move == true
-      game.logic.available_slots(board)
+      game.logic.available_slots(board, player_one, player_two)
       puts ''
       puts 'Make a move. Select one the above slots.'
       puts ''

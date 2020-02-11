@@ -10,15 +10,15 @@ class Logic
     element
   end
 
-  def available_slots(board)
+  def available_slots(board, player_one, player_two)
     slots = []
     board.each do |x|
       slots << x if x.is_a? Integer
     end
     if slots.count.even?
-      puts 'Player 2\'s turn'
+      puts "#{player_two}'s turn"
     else
-      puts 'Player 1\'s turn'
+      puts "#{player_one}'s turn"
     end
     slots.each { |x| print x.to_s + ' ' }
   end
