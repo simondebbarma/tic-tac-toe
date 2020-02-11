@@ -26,14 +26,14 @@ class Logic
   def valid_move(board, index)
     if !index.between?(0, 8)
       puts 'Invalid Move.'
-    elsif postion_taken(board, index)
+    elsif position_taken(board, index)
       puts 'Invalid Move.'
     else
       true
     end
   end
 
-  def postion_taken(board, index)
+  def position_taken(board, index)
     if board[index] == '^[1-9]'
       false
     elsif board[index] == 'X'

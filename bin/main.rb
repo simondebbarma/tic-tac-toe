@@ -14,6 +14,7 @@ class TicTacToe
   end
 
   def show_board
+    puts ''
     table(board)
   end
 
@@ -21,7 +22,7 @@ class TicTacToe
     @game = Game.new
   end
 
-  def collecte_info(player)
+  def collect_info(player)
     player_one_info(player)
     player_two_info(player)
     notice(player)
@@ -62,7 +63,7 @@ class TicTacToe
 end
 run = TicTacToe.new
 players = Player.new
-run.collecte_info(players)
+run.collect_info(players)
 player_one = players.username_one
 player_two = players.username_two
 run.show_board

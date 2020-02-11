@@ -61,6 +61,7 @@ module MenuHelper
 
   def end_message(player_one, player_two)
     puts 'Would you like to play again?'
+    puts ''
     puts 'Answer with yes or no'
     choice = gets.chomp.downcase
     until validate_choice(choice) == true
@@ -77,7 +78,8 @@ module MenuHelper
   end
 
   def quit
-    puts 'Goodbye Glad you enjoyed our game'
+    puts ''
+    puts 'Goodbye, glad you enjoyed our game!'
   end
 
   def play_again(player_one, player_two)
