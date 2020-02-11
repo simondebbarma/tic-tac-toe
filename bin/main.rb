@@ -1,5 +1,5 @@
 # !/usr/bin/env ruby
-require_relative '../lib/helper.rb'
+require_relative '../lib/input_validator_helper.rb'
 require_relative '../lib/menu.rb'
 require_relative '../lib/logic.rb'
 require_relative '../lib/game.rb'
@@ -22,18 +22,14 @@ class TicTacToe
     @game = Game.new
   end
 
-  def players
-    @player = Player.new
-  end
-
   def collecte_info(player)
     player_one_info(player)
     player_two_info(player)
     notice(player)
   end
 
-  def play(player_one, player_two, menu = nil)
-    turn(board, menu) until game.game_end(board)
+  def play(player_one, player_two)
+    turn(board) until game.game_end(board)
 
     if game.winner(board) == 'X'
       puts "#{player_one} is the winner"
@@ -45,7 +41,7 @@ class TicTacToe
     end
   end
 
-  def turn(board, _menu = nil)
+  def turn(board)
     is_valid_move = false
     until is_valid_move == true
       game.logic.available_slots(board)
@@ -65,10 +61,10 @@ class TicTacToe
     puts ''
   end
 end
-players = Player.new
-player_one = players.username_one
-player_two = players.username_one
 run = TicTacToe.new
+players = Player.new
 run.collecte_info(players)
+player_one = players.username_one
+player_two = players.username_two
 run.show_board
 run.play(player_one, player_two)

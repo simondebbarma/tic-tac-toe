@@ -1,15 +1,4 @@
-
-
 class Logic
-
-  def draw(board)
-    if board_full(board)
-      win(board).class != Array
-    else
-      false
-    end
-  end
-
   def board_full(board)
     element = board.all? do |el|
       if el == 'X'

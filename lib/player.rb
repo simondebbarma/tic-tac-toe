@@ -1,4 +1,3 @@
-
 class Player
   attr_accessor :username_one, :username_two
 
@@ -6,5 +5,4 @@ class Player
     @username_one = username_one
     @username_two = username_two
   end
-
 end

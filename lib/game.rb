@@ -1,5 +1,4 @@
-require_relative './helper.rb'
-require_relative './menu.rb'
+require_relative './input_validator_helper.rb'
 require_relative './logic.rb'
 
 WIN_POSSIBILITY = [
@@ -41,6 +40,14 @@ class Game
     false
   end
 
+  def draw(board)
+    if logic.board_full(board)
+      win(board).class != Array
+    else
+      false
+    end
+  end
+
   def winner(board)
     if win(board).class == Array
       win_player = win(board)
@@ -52,7 +59,7 @@ class Game
   end
 
   def game_end(board)
-    win(board) || logic.draw(board)
+    win(board) || draw(board)
   end
 
   def move(board, index, token = 'X')
