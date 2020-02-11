@@ -15,8 +15,15 @@ class TicTacToe
   end
 
   def show_board
-    welcome_message
     table(board)
+  end
+
+  def game
+    @game = Game.new
+  end
+
+  def players
+    @player = Player.new
   end
 
   def collecte_info(player)
@@ -25,29 +32,43 @@ class TicTacToe
     notice(player)
   end
 
-  def play(board, player_name_one = nil, player_name_two = nil, menu = nil)
-    turn(board, menu) until Game.game_end(board)
+  def play(player_one, player_two, menu = nil)
+    turn(board, menu) until game.game_end(board)
 
-    if winner(board) == 'X'
-      puts "#{player_name_one} is the winner"
+    if game.winner(board) == 'X'
+      puts "#{player_one} is the winner"
     elsif winner(board) == 'O'
-      puts "#{player_name_two} is the winner"
+      puts "#{player_two} is the winner"
 
     else
       puts 'It a Draw!'
     end
+  end
 
+  def turn(board, _menu = nil)
+    is_valid_move = false
+    until is_valid_move == true
+      game.logic.available_slots(board)
+      puts ''
+      puts 'Make a move. Select one the above slots.'
+      puts ''
+      input = gets.chomp
+      input = convert_input(input)
+      is_valid_move = game.logic.valid_move(board, input)
+      puts ''
+      puts '-----------------------------------------'
+      puts ''
+    end
+
+    game.move(board, input, game.current_player(board))
+    show_board
+    puts ''
   end
 end
 players = Player.new
 player_one = players.username_one
 player_two = players.username_one
 run = TicTacToe.new
-run.show_board
 run.collecte_info(players)
+run.show_board
 run.play(player_one, player_two)
-# TicTacToe.show_board
-# runtime = Logic.new
-# runtime.play(b.board)
-
-# play(board, player_one, player_two, menu)

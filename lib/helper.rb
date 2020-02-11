@@ -3,15 +3,11 @@ module ValidatorHelper
     if name == ''
       false
     else
-      name != ' '
+      name != ' ' || name != '  '
     end
   end
 
   def convert_input(input)
     input.to_i - 1
-  end
-
-  def payer_oneNmessage
-
   end
 end
