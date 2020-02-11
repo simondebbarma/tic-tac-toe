@@ -58,4 +58,41 @@ module MenuHelper
     puts "#{players.username_two} you are gonna be O"
     puts ''
   end
+
+  def end_message(player_one, player_two)
+    puts 'Would you like to play again?'
+    puts 'Answer with yes or no'
+    choice = gets.chomp.downcase
+    until validate_choice(choice) == true
+      puts 'Answer with yes or no'
+      choice = gets.chomp.downcase
+      validate_choice(choice)
+    end
+
+    if choice == 'yes'
+      play_again(player_one, player_two)
+    elsif choice == 'no'
+      quit
+    end
+  end
+
+  def quit
+    puts 'Goodbye Glad you enjoyed our game'
+  end
+
+  def play_again(player_one, player_two)
+    run = TicTacToe.new
+    run.show_board
+    run.play(player_one, player_two)
+  end
+
+  def custom_message_one(player_one, player_two)
+    puts "#{player_one} is the winner"
+    end_message(player_one, player_two)
+  end
+
+  def custom_message_two(player_one, player_two)
+    puts "#{player_two} is the winner"
+    end_message(player_one, player_two)
+  end
 end

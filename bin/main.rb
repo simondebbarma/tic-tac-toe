@@ -1,7 +1,6 @@
 # !/usr/bin/env ruby
 require_relative '../lib/input_validator_helper.rb'
 require_relative '../lib/menu.rb'
-require_relative '../lib/logic.rb'
 require_relative '../lib/game.rb'
 require_relative '../lib/player.rb'
 
@@ -32,12 +31,12 @@ class TicTacToe
     turn(board) until game.game_end(board)
 
     if game.winner(board) == 'X'
-      puts "#{player_one} is the winner"
+      custom_message_one(player_one, player_two)
     elsif winner(board) == 'O'
-      puts "#{player_two} is the winner"
-
+      custom_message_two(player_one, player_two)
     else
       puts 'It a Draw!'
+      end_message(player_one, player_two)
     end
   end
 
