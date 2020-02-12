@@ -58,6 +58,7 @@ class TicTacToe
     end
 
     game.move(board, input, game.current_player(board))
+    puts `clear`
     show_board
     puts ''
   end

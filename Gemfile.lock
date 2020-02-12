@@ -2,12 +2,18 @@ GEM
   remote: https://rubygems.org/
   specs:
     colorize (0.8.1)
+    paint (2.1.1)
+    unicode-display_width (1.6.1)
+    whirly (0.2.6)
+      unicode-display_width (~> 1.1)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   colorize (~> 0.8.1)
+  paint
+  whirly
 
 BUNDLED WITH
    1.17.2

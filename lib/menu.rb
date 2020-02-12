@@ -1,5 +1,6 @@
 require_relative './input_validator_helper.rb'
 require 'colorize'
+require 'whirly'
 
 module MenuHelper
   include ValidatorHelper
@@ -12,7 +13,9 @@ module MenuHelper
   end
 
   def welcome_message
-    puts 'Welcome to Tic-Tac-Toe!'.colorize(:blue)
+    Whirly.start spinner: 'dots3', color: false, status: 'Welcome to Tic-Tac-Toe!'.colorize(:blue) do
+      sleep 4
+    end
   end
 
   def player_one_info(player)
@@ -33,7 +36,7 @@ module MenuHelper
         player.username_one = 'Player 1'
       end
     end
-    puts ''
+    puts `clear`
   end
 
   def player_two_info(player)
@@ -52,13 +55,12 @@ module MenuHelper
         player.username_two = 'Player 2'
       end
     end
-    puts ''
+    puts `clear`
   end
 
   def notice(players)
     puts "#{players.username_one} you will play as X".colorize(:yellow)
     puts "#{players.username_two} you are gonna be O".colorize(:yellow)
-    puts ''
   end
 
   def end_message(player_one, player_two)
@@ -80,23 +82,28 @@ module MenuHelper
   end
 
   def quit
-    puts ''
+    puts `clear`
     puts 'Goodbye, glad you enjoyed our game!'.colorize(:yellow)
   end
 
   def play_again(player_one, player_two)
+    puts `clear`
     run = TicTacToe.new
     run.show_board
     run.play(player_one, player_two)
   end
 
   def custom_message_one(player_one, player_two)
-    puts "#{player_one} is the winner".colorize(:yellow)
+    Whirly.start spinner: 'star', color: false, status: "#{player_one} is the winner".colorize(:yellow) do
+      sleep 4
+    end
     end_message(player_one, player_two)
   end
 
   def custom_message_two(player_one, player_two)
-    puts "#{player_two} is the winner".colorize(:yellow)
+    Whirly.start spinner: 'star', color: false, status: "#{player_two} is the winner".colorize(:yellow) do
+      sleep 4
+    end
     end_message(player_one, player_two)
   end
 end
