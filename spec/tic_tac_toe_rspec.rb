@@ -15,7 +15,7 @@ describe TicTacToe do
   describe ' Display the board ' do
     let(:board) { %w[X X X O X O X O X] }
     let(:tictactoe) { TicTacToe.new }
-    def capture_ouput
+    def capture_output
       old_stdout = $stdout
       $stdout = StringIO.new('', 'w')
       yield
@@ -32,6 +32,17 @@ describe TicTacToe do
       expect(output).to include(' O | X | O')
       expect(output).to include('-----------')
       expect(output).to include(' X | O | X')
+    end
+  end
+
+  describe 'Play Game' do
+    let(:tictactoe) { TicTacToe.new }
+    let(:players) { Player.new('Certil', 'Simon') }
+    #let(:over) { Game.new.game_end(tictactoe.board) }
+    it ' Ask the player to choose a position on the board' do
+      allow($stdout).to receive(:puts)
+      expect(tictactoe).to receive(:gets).at_least(:once).and_return('1')
+      tictactoe.play(players.username_one, players.username_two)
     end
   end
 end
