@@ -44,12 +44,12 @@ $ cd tic-tac-toe
 > Run in terminal [[You must have Ruby installed on your system.](https://www.ruby-lang.org/en/documentation/installation/ "You must have Ruby installed on your system.")]
 
 ```
-$ ruby bundle install
+$ bundle install
 ```
 > the command bundle install is important to install required gem for the game to start. After you finish type:
 
 ```
-$ ruby bin/tic-tac-toe
+$ ruby bin/main.rb
 ```
 
 ---
