@@ -3,6 +3,7 @@ require_relative '../lib/input_validator_helper.rb'
 require_relative '../lib/menu.rb'
 require_relative '../lib/game.rb'
 require_relative '../lib/player.rb'
+require 'colorize'
 
 class TicTacToe
   extend ValidatorHelper
@@ -36,7 +37,7 @@ class TicTacToe
     elsif game.winner(board) == 'O'
       custom_message_two(player_one, player_two)
     else
-      puts 'It a Draw!'
+      puts 'It a Draw!'.colorize(:yellow)
       end_message(player_one, player_two)
     end
   end
@@ -57,6 +58,7 @@ class TicTacToe
     end
 
     game.move(board, input, game.current_player(board))
+    puts `clear`
     show_board
     puts ''
   end
