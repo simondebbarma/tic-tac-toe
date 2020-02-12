@@ -1,3 +1,4 @@
+require 'colorize'
 module ValidatorHelper
   def validate_name(name)
     if name == ''
@@ -14,10 +15,10 @@ module ValidatorHelper
   def validate_choice(input)
     choice = input.downcase
     if choice == ''
-      puts 'invalid choice'
+      puts 'invalid choice'.colorize(:red)
       false
     elsif choice == ' '
-      puts 'invalid choice'
+      puts 'invalid choice'.colorize(:red)
       false
 
     elsif choice == 'yes'
