@@ -102,31 +102,34 @@ describe TicTacToe do
   describe 'Game Draw' do
     let(:tictactoe) { TicTacToe.new }
     let(:players) { Player.new('Certil', 'Simon') }
-    let(:emptyboard) {tictactoe.instance_variable_get(:@board)}
+    let(:emptyboard) { tictactoe.instance_variable_get(:@board) }
 
-      it 'is is not a draw' do
-        expect(tictactoe.game.draw(emptyboard)).to eq(false)
-      end
+    it 'is is not a draw' do
+      expect(tictactoe.game.draw(emptyboard)).to eq(false)
+    end
 
     let(:boardfull) { %w[X O X O X X O X O] }
-    let(:board) {tictactoe.instance_variable_set(:@board, boardfull)}
+    let(:board) { tictactoe.instance_variable_set(:@board, boardfull) }
 
-      it 'It is a draw' do
-        expect(tictactoe.game.draw(board)).to eq(true)
-      end
+    it 'It is a draw' do
+      expect(tictactoe.game.draw(board)).to eq(true)
+    end
   end
 
-  # describe 'Available Slots' do
-  #   let(:tictactoe) { TicTacToe.new }
-  #   let(:logic) { Logic.new }
-  #   let(:players) { Player.new('Certil', 'Simon') }
-  #   let(:boardthree) { %w[X X 3 O X O X O X] }
-  #   let(:board) {tictactoe.instance_variable_set(:@board, boardthree)}
+  describe '#board_full' do
+    let(:tictactoe) { TicTacToe.new }
+    it 'returns true for a draw' do
+      board = %w[X O X O X X O X O]
+      tictactoe.instance_variable_set(:@board, board)
 
-  #   it 'Position 3 is available' do
-  #     p logic.available_slots(board, players.username_one, players.username_two)
-  #     expect(logic.available_slots(board, players.username_one, players.username_two)).to eq('3 ')
-  #   end
-  # end
+      expect(tictactoe.game.logic.board_full(board)).to be_truthy
+    end
 
+    it 'returns false for an in-progress Tictacto' do
+      board = %w[X 9 X O 9 X 9 X O]
+      tictactoe.instance_variable_set(:@board, board)
+
+      expect(tictactoe.game.logic.board_full(board)).to be_falsey
+    end
+  end
 end
