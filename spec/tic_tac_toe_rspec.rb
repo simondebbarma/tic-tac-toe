@@ -12,6 +12,33 @@ describe TicTacToe do
     end
   end
 
+  describe 'Tchek if the players exis' do
+    let(:players) { Player.new('Certil', 'Simon') }
+    it ' Create 2 player an asign a username for each' do
+      expect(players.username_one).to eq('Certil')
+      expect(players.username_two).to eq('Simon')
+    end
+  end
+
+  describe '#validate_name' do
+    include ValidatorHelper
+    let(:validname) { 'Simon' }
+    let(:invalidspace) { ' ' }
+    let(:invalidempty) { '' }
+
+    it 'player name is valid' do
+      expect(validate_name(validname)).to eq(true)
+    end
+
+    it 'player name is invalid, space given' do
+      expect(validate_name(invalidspace)).to eq(false)
+    end
+
+    it 'player name is invalid, empty string given' do
+      expect(validate_name(invalidempty)).to eq(false)
+    end
+  end
+
   describe 'Display the board' do
     let(:board) { %w[X X X O X O X O X] }
     let(:tictactoe) { TicTacToe.new }
@@ -37,12 +64,15 @@ describe TicTacToe do
 
   describe 'Play Game' do
     let(:tictactoe) { TicTacToe.new }
+    let(:players) { Player.new('Certil', 'Simon') }
     def run_bin(file)
       eval(File.read(file), binding)
     end
     it ' It create new Instace of tictatoe An play the game' do
-      allow(tictactoe).to receive(:play)
+      allow($stdout).to receive(:puts)
+
       expect(TicTacToe).to receive(:new).and_return(tictactoe)
+      expect(tictactoe).to receive(:play).with(players.username_one, players.username_two)
       run_bin('./bin/main.rb')
     end
   end
@@ -58,22 +88,26 @@ describe TicTacToe do
     end
   end
 
-  describe '#validate_name' do
-    include ValidatorHelper
-    let(:validname) { 'Simon' }
-    let(:invalidspace) { ' ' }
-    let(:invalidempty) { '' }
-
-    it 'player name is valid' do
-      expect(validate_name(validname)).to eq(true)
+  describe '#Winner' do
+    let(:tictactoe) { TicTacToe.new }
+    let(:players) { Player.new('Certil', 'Simon') }
+    let(:moves) { %w[X X X O O 6 7 8 8] }
+    it 'congratulates the winner X if his move win' do
+      tictactoe.instance_variable_set(:@board, moves)
+      expect($stdout).to receive(:puts).with("#{players.username_one} is the winner")
+      tictactoe.play(players.username_one, players.username_two)
     end
+  end
 
-    it 'player name is invalid, space given' do
-      expect(validate_name(invalidspace)).to eq(false)
-    end
-
-    it 'player name is invalid, empty string given' do
-      expect(validate_name(invalidempty)).to eq(false)
+  describe 'Game Draw' do
+    let(:tictactoe) { TicTacToe.new }
+    let(:board) { %w[X O X O X X O X O] }
+    let(:players) { Player.new('Certil', 'Simon') }
+    it 'Print is a daw game' do
+      allow($stdout).to receive(:puts)
+      tictactoe.instance_variable_set(:@board, board)
+      expect($stdout).to receive(:puts).with('It a Draw!')
+      #tictactoe.play(players.username_one, players.username_two)
     end
   end
 end

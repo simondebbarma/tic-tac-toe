@@ -1,3 +1,6 @@
+--require spec_helper.rb
 --require tic_tac_toe_rspec.rb
 --require player_rspec.rb
+--require game_rspec.rb
+
 

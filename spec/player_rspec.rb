@@ -12,4 +12,23 @@ describe Player do
       expect(players.username_two).to eq('Simon')
     end
   end
+
+  describe '#validate_name' do
+    include ValidatorHelper
+    let(:validname) { 'Simon' }
+    let(:invalidspace) { ' ' }
+    let(:invalidempty) { '' }
+
+    it 'player name is valid' do
+      expect(validate_name(validname)).to eq(true)
+    end
+
+    it 'player name is invalid, space given' do
+      expect(validate_name(invalidspace)).to eq(false)
+    end
+
+    it 'player name is invalid, empty string given' do
+      expect(validate_name(invalidempty)).to eq(false)
+    end
+  end
 end
