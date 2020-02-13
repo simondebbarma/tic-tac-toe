@@ -35,21 +35,21 @@ describe TicTacToe do
     end
   end
 
-  describe 'Play Game' do
-    let(:tictactoe) { TicTacToe.new }
-    let(:players) { Player.new('Certil', 'Simon') }
-    #let(:over) { Game.new.game_end(tictactoe.board) }
-    it ' Ask the player to choose a position on the board' do
-      allow($stdout).to receive(:puts)
-      expect(tictactoe).to receive(:gets).at_least(:once).and_return('1')
-      tictactoe.play(players.username_one, players.username_two)
-    end
-  end
+  # describe 'Play Game' do
+  #   let(:tictactoe) { TicTacToe.new }
+  #   let(:players) { Player.new('Certil', 'Simon') }
+  #   #let(:over) { Game.new.game_end(tictactoe.board) }
+  #   it ' Ask the player to choose a position on the board' do
+  #     allow($stdout).to receive(:puts)
+  #     expect(tictactoe).to receive(:gets).at_least(:once).and_return('1')
+  #     tictactoe.play(players.username_one, players.username_two)
+  #   end
+  # end
 
   describe '#validate_name' do
-    let(:validname) {'Jefferson'}
-    let(:invalidspace) {' '}
-    let(:invalidempty) {''}
+    let(:validname) { Player.new('Certil', 'Simon') }
+    let(:invalidspace) { Player.new(' ', ' ') }
+    let(:invalidempty) { Player.new('', '') }
 
     it 'player name is valid' do
       expect (validname.validate_name).to eq(true)
