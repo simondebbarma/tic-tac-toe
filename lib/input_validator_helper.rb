@@ -1,10 +1,10 @@
 require 'colorize'
 module ValidatorHelper
   def validate_name(name)
-    if name == ''
+    if name == '' || name == ' '
       false
     else
-      name != ' ' || name != '  '
+      true
     end
   end
 
