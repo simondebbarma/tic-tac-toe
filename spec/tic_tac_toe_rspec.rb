@@ -12,7 +12,7 @@ describe TicTacToe do
     end
   end
 
-  describe ' Display the board ' do
+  describe 'Display the board' do
     let(:board) { %w[X X X O X O X O X] }
     let(:tictactoe) { TicTacToe.new }
     def capture_output
@@ -43,6 +43,24 @@ describe TicTacToe do
       allow($stdout).to receive(:puts)
       expect(tictactoe).to receive(:gets).at_least(:once).and_return('1')
       tictactoe.play(players.username_one, players.username_two)
+    end
+  end
+
+  describe '#validate_name' do
+    let(:validname) {'Jefferson'}
+    let(:invalidspace) {' '}
+    let(:invalidempty) {''}
+
+    it 'player name is valid' do
+      expect (validname.validate_name).to eq(true)
+    end
+
+    it 'player name is invalid, space given' do
+      expect (invalidspace.validate_name).to eq(true)
+    end
+
+    it 'player name is invalid, empty string given' do
+      expect (invalidempty.validate_name).to eq(true)
     end
   end
 end
