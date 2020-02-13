@@ -62,20 +62,20 @@ describe TicTacToe do
     end
   end
 
-  describe 'Play Game' do
-    let(:tictactoe) { TicTacToe.new }
-    let(:players) { Player.new('Certil', 'Simon') }
-    def run_bin(file)
-      eval(File.read(file), binding)
-    end
-    it ' It create new Instace of tictatoe An play the game' do
-      allow($stdout).to receive(:puts)
+  # describe 'Play Game' do
+  #   let(:tictactoe) { TicTacToe.new }
+  #   let(:players) { Player.new('Certil', 'Simon') }
+  #   def run_bin(file)
+  #     eval(File.read(file), binding)
+  #   end
+  #   it ' It create new Instace of tictatoe An play the game' do
+  #     allow($stdout).to receive(:puts)
 
-      expect(TicTacToe).to receive(:new).and_return(tictactoe)
-      expect(tictactoe).to receive(:play).with(players.username_one, players.username_two)
-      run_bin('./bin/main.rb')
-    end
-  end
+  #     expect(TicTacToe).to receive(:new).and_return(tictactoe)
+  #     expect(tictactoe).to receive(:play).with(players.username_one, players.username_two)
+  #     run_bin('./bin/main.rb')
+  #   end
+  # end
 
   describe ' Player turn' do
     let(:tictactoe) { TicTacToe.new }
@@ -101,13 +101,31 @@ describe TicTacToe do
 
   describe 'Game Draw' do
     let(:tictactoe) { TicTacToe.new }
-    let(:board) { %w[X O X O X X O X O] }
     let(:players) { Player.new('Certil', 'Simon') }
-    it 'Print is a daw game' do
-      allow($stdout).to receive(:puts)
-      tictactoe.instance_variable_set(:@board, board)
-      expect($stdout).to receive(:puts).with('It a Draw!')
-      #tictactoe.play(players.username_one, players.username_two)
+    let(:emptyboard) {tictactoe.instance_variable_get(:@board)}
+
+      it 'is is not a draw' do
+        expect(tictactoe.game.draw(emptyboard)).to eq(false)
+      end
+
+    let(:boardfull) { %w[X O X O X X O X O] }
+    let(:board) {tictactoe.instance_variable_set(:@board, boardfull)}
+
+      it 'It is a draw' do
+        expect(tictactoe.game.draw(board)).to eq(true)
+      end
+  end
+
+  describe 'Available Slots' do
+    let(:tictactoe) { TicTacToe.new }
+    let(:logic) { Logic.new }
+    let(:players) { Player.new('Certil', 'Simon') }
+    let(:boardthree) { %w[X X 3 O X O X O X] }
+    let(:board) {tictactoe.instance_variable_set(:@board, boardthree)}
+
+    it 'Position 3 is available' do
+      p logic.available_slots(board, players.username_one, players.username_two)
+      expect(logic.available_slots(board, players.username_one, players.username_two)).to eq('3 ')
     end
   end
 end
