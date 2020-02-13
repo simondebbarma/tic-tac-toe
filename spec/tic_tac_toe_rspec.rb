@@ -5,7 +5,7 @@ require_relative '../lib/menu.rb'
 require_relative '../lib/game.rb'
 
 describe TicTacToe do
-  describe 'The existence of the board' do
+  describe 'Tchek if the board exist' do
     let(:tictactoe) { TicTacToe.new }
     it ' Create an instance variable of the board for the game with element from 1 to 9' do
       expect(tictactoe.instance_variable_get(:@board)).to eq([1, 2, 3, 4, 5, 6, 7, 8, 9])
