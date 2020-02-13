@@ -116,16 +116,17 @@ describe TicTacToe do
       end
   end
 
-  describe 'Available Slots' do
-    let(:tictactoe) { TicTacToe.new }
-    let(:logic) { Logic.new }
-    let(:players) { Player.new('Certil', 'Simon') }
-    let(:boardthree) { %w[X X 3 O X O X O X] }
-    let(:board) {tictactoe.instance_variable_set(:@board, boardthree)}
+  # describe 'Available Slots' do
+  #   let(:tictactoe) { TicTacToe.new }
+  #   let(:logic) { Logic.new }
+  #   let(:players) { Player.new('Certil', 'Simon') }
+  #   let(:boardthree) { %w[X X 3 O X O X O X] }
+  #   let(:board) {tictactoe.instance_variable_set(:@board, boardthree)}
 
-    it 'Position 3 is available' do
-      p logic.available_slots(board, players.username_one, players.username_two)
-      expect(logic.available_slots(board, players.username_one, players.username_two)).to eq('3 ')
-    end
-  end
+  #   it 'Position 3 is available' do
+  #     p logic.available_slots(board, players.username_one, players.username_two)
+  #     expect(logic.available_slots(board, players.username_one, players.username_two)).to eq('3 ')
+  #   end
+  # end
+
 end

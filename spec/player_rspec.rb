@@ -5,7 +5,7 @@ require_relative '../lib/menu.rb'
 require_relative '../lib/game.rb'
 
 describe Player do
-  describe 'Tchek if the players exis' do
+  describe 'Check if the players exists' do
     let(:players) { Player.new('Certil', 'Simon') }
     it ' Create 2 player an asign a username for each' do
       expect(players.username_one).to eq('Certil')
