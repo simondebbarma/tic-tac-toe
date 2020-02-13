@@ -34,18 +34,18 @@ describe TicTacToe do
       expect(output).to include(' X | O | X')
     end
   end
-  
-  # TODO - Fix loop in tests
-  # describe 'Play Game' do
-  #   let(:tictactoe) { TicTacToe.new }
-  #   let(:players) { Player.new('Certil', 'Simon') }
-  #   #let(:over) { Game.new.game_end(tictactoe.board) }
-  #   it ' Ask the player to choose a position on the board' do
-  #     allow($stdout).to receive(:puts)
-  #     expect(tictactoe).to receive(:gets).at_least(:once).and_return('1')
-  #     tictactoe.play(players.username_one, players.username_two)
-  #   end
-  # end
+
+  describe 'Play Game' do
+    let(:tictactoe) { TicTacToe.new }
+    def run_bin(file)
+      eval(File.read(file), binding)
+    end
+    it ' It create new Instace of tictatoe An play the game' do
+      allow(tictactoe).to receive(:play)
+      expect(TicTacToe).to receive(:new).and_return(tictactoe)
+      run_bin('./bin/main.rb')
+    end
+  end
 
   describe '#validate_name' do
     include ValidatorHelper
@@ -58,7 +58,6 @@ describe TicTacToe do
     end
 
     it 'player name is invalid, space given' do
-      p validate_name(invalidspace)
       expect(validate_name(invalidspace)).to eq(false)
     end
 
