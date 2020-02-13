@@ -47,6 +47,17 @@ describe TicTacToe do
     end
   end
 
+  describe ' Player turn' do
+    let(:tictactoe) { TicTacToe.new }
+    let(:players) { Player.new('Certil', 'Simon') }
+    let(:board) { tictactoe.instance_variable_get(:@board) }
+    it 'receives user input via the gets method' do
+      allow($stdout).to receive(:puts)
+      expect(tictactoe).to receive(:gets).and_return('1')
+      tictactoe.turn(board, players.username_one, players.username_two)
+    end
+  end
+
   describe '#validate_name' do
     include ValidatorHelper
     let(:validname) { 'Simon' }
