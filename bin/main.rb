@@ -63,10 +63,10 @@ class TicTacToe
     puts ''
   end
 end
-#run = TicTacToe.new
-#players = Player.new
-#run.collect_info(players)
-#player_one = players.username_one
-#player_two = players.username_two
-#run.show_board
-#run.play(player_one, player_two)
+# run = TicTacToe.new
+# players = Player.new
+# run.collect_info(players)
+# player_one = players.username_one
+# player_two = players.username_two
+# run.show_board
+# run.play(player_one, player_two)
