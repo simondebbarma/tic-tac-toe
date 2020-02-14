@@ -66,6 +66,19 @@ describe TicTacToe do
     end
   end
 
+  describe '#CurrentPlayer' do
+    let(:board) { %w[O 2 3 4 X 6 7 8 9] }
+    let(:tictactoe) { TicTacToe.new }
+    let(:players) { Player.new('Certil', 'Simon') }
+    it "Return the current Player's token" do
+      tictactoe.instance_variable_set(:@board, board)
+      expect(tictactoe.game.current_player(tictactoe.instance_variable_get(:@board))).to eq('X')
+    end
+    it 'It rais an error if no board given as argument' do
+      expect { tictactoe.game.current_player }.to raise_error(ArgumentError)
+    end
+  end
+
   describe '#Convert_input' do
     include ValidatorHelper
     let(:tictactoe) { TicTacToe.new }
@@ -107,6 +120,17 @@ describe TicTacToe do
     end
   end
 
+  describe '#position_taken' do
+    let(:game) { Game.new }
+    let(:board) { %w[X 2 3 4 5 6 7 8 O] }
+    it 'returns true if the position on the board is already occupied' do
+      expect(game.logic.position_taken(board, 0)).to be_truthy
+    end
+    it 'returns false if the position on the board is already occupied' do
+      expect(game.logic.position_taken(board, 1)).to be_falsey
+    end
+  end
+
   describe '#Play' do
     let(:tictactoe) { TicTacToe.new }
     let(:players) { Player.new('Certil', 'Simon') }
@@ -126,7 +150,7 @@ describe TicTacToe do
     end
   end
 
-  describe ' Player turn' do
+  describe '#Turn' do
     let(:tictactoe) { TicTacToe.new }
     let(:players) { Player.new('Certil', 'Simon') }
     let(:board) { tictactoe.instance_variable_get(:@board) }
@@ -134,6 +158,37 @@ describe TicTacToe do
       allow($stdout).to receive(:puts)
       expect(tictactoe).to receive(:gets).and_return('1')
       tictactoe.turn(board, players.username_one, players.username_two)
+    end
+  end
+
+  describe '#Count_move' do
+    let(:tictactoe) { TicTacToe.new }
+    let(:board) { %w[O 2 3 4 X 6 7 8 X] }
+    it 'Count occupied position' do
+      tictactoe.instance_variable_set(:@board, board)
+      expect(tictactoe.game.count_move(tictactoe.instance_variable_get(:@board))).to eq(3)
+    end
+  end
+
+  describe '#game_end' do
+    let(:board) { %w[X X X O X O X O X] }
+    let(:tictactoe) { TicTacToe.new }
+    it 'return true if the game end' do
+      expect(tictactoe.game.game_end(board)).to be_truthy
+    end
+  end
+
+  describe '#Win ' do
+    let(:tictactoe) { TicTacToe.new }
+    let(:board) { %w[X O X O X X O X O] }
+    it 'Return false for a draw' do
+      tictactoe.instance_variable_set(:@board, board)
+      expect(tictactoe.game.win(tictactoe.instance_variable_get(:@board))).to be_falsey
+    end
+    let(:win_board) { %w[X O X O X O O X X] }
+    it 'Return true for a win an display the winning position' do
+      tictactoe.instance_variable_set(:@board, win_board)
+      expect(tictactoe.game.win(tictactoe.instance_variable_get(:@board))).to contain_exactly(0, 4, 8)
     end
   end
 
@@ -148,7 +203,7 @@ describe TicTacToe do
     end
   end
 
-  describe 'Game Draw' do
+  describe '#Draw' do
     let(:tictactoe) { TicTacToe.new }
     let(:players) { Player.new('Certil', 'Simon') }
     let(:emptyboard) { tictactoe.instance_variable_get(:@board) }
