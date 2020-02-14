@@ -9,3 +9,12 @@ RSpec::Matchers.define :include_array do |expected|
     actual.any? { |array| match_array(expected).matches?(array) }
   end
 end
+
+def capture_output
+  old_stdout = $stdout
+  $stdout = StringIO.new('', 'w')
+  yield
+  $stdout.string
+ensure
+  $stdout = old_stdout
+end

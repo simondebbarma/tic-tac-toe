@@ -42,14 +42,6 @@ describe TicTacToe do
   describe 'Display the board' do
     let(:board) { %w[X X X O X O X O X] }
     let(:tictactoe) { TicTacToe.new }
-    def capture_output
-      old_stdout = $stdout
-      $stdout = StringIO.new('', 'w')
-      yield
-      $stdout.string
-    ensure
-      $stdout = old_stdout
-    end
 
     let(:output) { capture_output { tictactoe.show_board } }
     it 'print the board for the player' do
