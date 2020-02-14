@@ -12,7 +12,7 @@ describe TicTacToe do
     end
   end
 
-  describe 'Tchek if the players exis' do
+  describe 'Chek if the players exis' do
     let(:players) { Player.new('Certil', 'Simon') }
     it ' Create 2 player an asign a username for each' do
       expect(players.username_one).to eq('Certil')
