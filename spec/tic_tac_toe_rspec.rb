@@ -18,6 +18,15 @@ describe TicTacToe do
       expect(players.username_one).to eq('Certil')
       expect(players.username_two).to eq('Simon')
     end
+    let(:players_two) { Player.new }
+    it ' Create 2 player With no Argument and return nil for their username' do
+      expect(players_two.username_one).to eq(nil)
+      expect(players_two.username_two).to eq(nil)
+    end
+
+    it ' Rais an argument error if more than two argument given' do
+      expect { Player.new('Certil', 'Simon', 'Remy') }.to raise_error(ArgumentError)
+    end
   end
 
   describe '#validate_name' do
@@ -44,13 +53,46 @@ describe TicTacToe do
     let(:tictactoe) { TicTacToe.new }
 
     let(:output) { capture_output { tictactoe.show_board } }
-    it 'print the board for the player' do
+    it 'print the board for the player without an argument' do
       tictactoe.instance_variable_set(:@board, board)
       expect(output).to include(' X | X | X')
       expect(output).to include('-----------')
       expect(output).to include(' O | X | O')
       expect(output).to include('-----------')
       expect(output).to include(' X | O | X')
+    end
+    it 'It rais an error if a board given as argument' do
+      expect { tictactoe.show_board(board) }.to raise_error(ArgumentError)
+    end
+  end
+
+  describe '#Convert_input' do
+    include ValidatorHelper
+    let(:tictactoe) { TicTacToe.new }
+    it "accepts the user's input (a string) as an argument rais errorif no argument" do
+      expect { tictactoe.convert_input }.to raise_error(ArgumentError)
+    end
+
+    it "converts the user's input (a string) into an integer" do
+      expect(tictactoe.convert_input('1')).to be_an(Integer)
+    end
+
+    it "converts the user's input from the user-friendly format (on a 1-9 scale) to the array-friendly format" do
+      expect(tictactoe.convert_input('1')).to eq(0)
+      expect(tictactoe.convert_input('5')).to eq(4)
+    end
+  end
+
+  describe '#move' do
+    let(:tictactoe) { TicTacToe.new }
+    let(:board) { tictactoe.instance_variable_get(:@board) }
+    it 'allows "X" player in the top left and "O" in the middle' do
+      tictactoe.game.move(board, 0, 'X')
+      tictactoe.game.move(board, 4, 'O')
+      expect(board).to eq(['X', 2, 3, 4, 'O', 6, 7, 8, 9])
+    end
+    it 'It rais an error if no board given' do
+      expect { tictactoe.game.move('X') }.to raise_error(ArgumentError)
     end
   end
 
