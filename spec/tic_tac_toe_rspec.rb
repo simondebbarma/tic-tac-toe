@@ -96,6 +96,17 @@ describe TicTacToe do
     end
   end
 
+  describe '#valid_move?' do
+    let(:tictactoe) { TicTacToe.new }
+    let(:board) { tictactoe.instance_variable_get(:@board) }
+    it 'returns true/false based on whether the position is already occupied' do
+      expect(tictactoe.game.logic.valid_move(board, 0)).to be_truthy
+    end
+    it 'checks that the attempted move is within the bounds of the tictactoe board' do
+      expect(tictactoe.game.logic.valid_move(board, 44)).to be_falsey
+    end
+  end
+
   describe '#Play' do
     let(:tictactoe) { TicTacToe.new }
     let(:players) { Player.new('Certil', 'Simon') }
