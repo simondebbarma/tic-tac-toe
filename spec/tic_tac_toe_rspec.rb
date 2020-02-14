@@ -62,20 +62,24 @@ describe TicTacToe do
     end
   end
 
-  # describe 'Play Game' do
-  #   let(:tictactoe) { TicTacToe.new }
-  #   let(:players) { Player.new('Certil', 'Simon') }
-  #   def run_bin(file)
-  #     eval(File.read(file), binding)
-  #   end
-  #   it ' It create new Instace of tictatoe An play the game' do
-  #     allow($stdout).to receive(:puts)
+  describe '#Play' do
+    let(:tictactoe) { TicTacToe.new }
+    let(:players) { Player.new('Certil', 'Simon') }
 
-  #     expect(TicTacToe).to receive(:new).and_return(tictactoe)
-  #     expect(tictactoe).to receive(:play).with(players.username_one, players.username_two)
-  #     run_bin('./bin/main.rb')
-  #   end
-  # end
+    it ' Play the entire game' do
+      allow($stdout).to receive(:puts)
+      expect(tictactoe).to receive(:gets).and_return('1')
+      expect(tictactoe).to receive(:gets).and_return('2')
+      expect(tictactoe).to receive(:gets).and_return('3')
+      expect(tictactoe).to receive(:gets).and_return('4')
+      expect(tictactoe).to receive(:gets).and_return('5')
+      expect(tictactoe).to receive(:gets).and_return('6')
+      expect(tictactoe).to receive(:gets).and_return('7')
+
+      expect($stdout).to receive(:puts).with("#{players.username_one} is the winner")
+      tictactoe.play(players.username_one, players.username_two)
+    end
+  end
 
   describe ' Player turn' do
     let(:tictactoe) { TicTacToe.new }
