@@ -63,24 +63,6 @@ module MenuHelper
     puts "#{players.username_two} you are gonna be O".colorize(:yellow)
   end
 
-  def end_message(player_one, player_two)
-    puts 'Would you like to play again?'
-    puts ''
-    puts 'Answer with yes or no'.colorize(:yellow)
-    choice = gets.chomp.downcase
-    until validate_choice(choice) == true
-      puts 'Error answer with yes or no'.colorize(:red)
-      choice = gets.chomp.downcase
-      validate_choice(choice)
-    end
-
-    if choice == 'yes'
-      play_again(player_one, player_two)
-    elsif choice == 'no'
-      quit
-    end
-  end
-
   def quit
     puts `clear`
     puts 'Goodbye, glad you enjoyed our game!'.colorize(:yellow)
@@ -93,17 +75,11 @@ module MenuHelper
     run.play(player_one, player_two)
   end
 
-  def custom_message_one(player_one, player_two)
-    Whirly.start spinner: 'star', color: false, status: "#{player_one} is the winner".colorize(:yellow) do
-      sleep 4
-    end
-    end_message(player_one, player_two)
+  def custom_message_one(player_one, _player_two)
+    puts "#{player_one} is the winner"
   end
 
-  def custom_message_two(player_one, player_two)
-    Whirly.start spinner: 'star', color: false, status: "#{player_two} is the winner".colorize(:yellow) do
-      sleep 4
-    end
-    end_message(player_one, player_two)
+  def custom_message_two(_player_one, player_two)
+    puts "#{player_two} is the winner"
   end
 end

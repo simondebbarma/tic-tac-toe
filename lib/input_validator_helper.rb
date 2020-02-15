@@ -4,7 +4,7 @@ module ValidatorHelper
     if name == ''
       false
     else
-      name != ' ' || name != '  '
+      name != ' '
     end
   end
 
