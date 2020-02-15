@@ -5,7 +5,7 @@ require_relative '../lib/menu.rb'
 require_relative '../lib/game.rb'
 
 describe TicTacToe do
-  describe 'Tchek if the board exist' do
+  describe 'Chek if the board exist' do
     let(:tictactoe) { TicTacToe.new }
     it ' Create an instance variable of the board for the game with element from 1 to 9' do
       expect(tictactoe.instance_variable_get(:@board)).to eq([1, 2, 3, 4, 5, 6, 7, 8, 9])
@@ -112,7 +112,7 @@ describe TicTacToe do
   describe '#valid_move?' do
     let(:tictactoe) { TicTacToe.new }
     let(:board) { tictactoe.instance_variable_get(:@board) }
-    it 'returns true/false based on whether the position is already occupied' do
+    it 'returns true if the position is already occupied' do
       expect(tictactoe.game.logic.valid_move(board, 0)).to be_truthy
     end
     it 'checks that the attempted move is within the bounds of the tictactoe board' do
@@ -126,7 +126,7 @@ describe TicTacToe do
     it 'returns true if the position on the board is already occupied' do
       expect(game.logic.position_taken(board, 0)).to be_truthy
     end
-    it 'returns false if the position on the board is already occupied' do
+    it 'returns false if the position on the board is not occupied' do
       expect(game.logic.position_taken(board, 1)).to be_falsey
     end
   end
