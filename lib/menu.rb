@@ -13,7 +13,9 @@ module MenuHelper
   end
 
   def welcome_message
-    puts 'Welcome to Tic-Tac-Toe!'.colorize(:blue)
+    Whirly.start spinner: 'dots3', color: false, status: 'Welcome to Tic-Tac-Toe!'.colorize(:blue) do
+      sleep 4
+    end
   end
 
   def player_one_info(player)
@@ -59,5 +61,25 @@ module MenuHelper
   def notice(players)
     puts "#{players.username_one} you will play as X".colorize(:yellow)
     puts "#{players.username_two} you are gonna be O".colorize(:yellow)
+  end
+
+  def quit
+    puts `clear`
+    puts 'Goodbye, glad you enjoyed our game!'.colorize(:yellow)
+  end
+
+  def play_again(player_one, player_two)
+    puts `clear`
+    run = TicTacToe.new
+    run.show_board
+    run.play(player_one, player_two)
+  end
+
+  def custom_message_one(player_one, _player_two)
+    puts "#{player_one} is the winner"
+  end
+
+  def custom_message_two(_player_one, player_two)
+    puts "#{player_two} is the winner"
   end
 end
